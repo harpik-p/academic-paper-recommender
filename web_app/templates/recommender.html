@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Academic Paper Recommender</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../static/css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/creative.css" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Home</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#search">Search</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Academic Paper Recommender</h1>
+                <hr>
+                <p>Academic Paper Recommender can help you find the most relevant articles in your field in seconds!</p>
+                <a href="#search" class="btn btn-primary btn-xl page-scroll">Let's start!</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="search">
+        <div class="container">
+            <div class="col-lg-12 text-center">
+                <h1>Let's Search</h1>
+                <hr>
+                    <div class="header-content-inner-2">
+                    <p><b>Enter the PMID of the paper that is in your research area:</b></p>
+                    </div>
+                    <div style="color:Black">
+                        <form action={{form_action}} method='POST' >
+                            <input type="text" name="pmid" size="60" />
+                            <input type="submit" class="btn btn-primary btn-xl-2 page-scroll"/>
+                        </form>
+                    </div>
+                    <div class="header-content-inner-2">
+                        <p><small>{{msg}}If you don't know the PMID of the paper, <a href="http://www.ncbi.nlm.nih.gov/pubmed" target="_blank"><FONT COLOR="white">click here.</FONT></a></small></p>
+                    </div>
+                    <div style="margin-bottom:50px">
+                    </div>
+            </div>
+
+            <div class="col-lg-12 text-left">
+                <p><b> The paper you provided:</b></p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <style>
+                        table, td, th {
+                            border: 1px solid black;
+                        }
+                        th, td {
+                            text-align: center;
+                            padding: 10px;
+                        }
+                    </style>
+                    <table style="width:100%">
+                        <col width="30">
+                        <col width="300">
+                        <col width="200">
+                        <col width="30">
+                        <tr>
+                            <th>PMID</th>
+                            <th>Title</th>
+                            <th>Journal</th>
+                            <th>Year</th>
+                        </tr>
+                        {% for i in range(df_pmid.shape[0]) %}
+                        <tr>
+                            <td>{{df_pmid.iloc[i].PMID}}</td>
+                            <td>{{df_pmid.iloc[i].Title}}</td>
+                            <td>{{df_pmid.iloc[i].Journal}}</td>
+                            <td>{{df_pmid.iloc[i].Year}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                </div>
+
+            <div class="col-lg-12 text-left">
+                <p><b> Here are the similar papers we found for you:</b></p>
+            </div>
+            <div style="margin-bottom:15px">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <style>
+                        table, td, th {
+                            border: 1px solid black;
+                        }
+                        th, td {
+                            text-align: center;
+                            padding: 10px;
+                        }
+                    </style>
+                    <table style="width:100%">
+                        <col width="10">
+                        <col width="30">
+                        <col width="250">
+                        <col width="200">
+                        <col width="30">
+                        <col width="30">
+                        <tr>
+                            <th>Rank</th>
+                            <th>PMID</th>
+                            <th>Title</th>
+                            <th>Journal</th>
+                            <th>Year</th>
+                            <th>Score</th>
+                        </tr>
+                        {% for i in range(df.shape[0]) %}
+                        <tr>
+                            <td>{{i+1}}</td>
+                            <td>
+                                {{df.iloc[i].PMID}}</td>
+                            <td>{{df.iloc[i].Title}}</td>
+                            <td>{{df.iloc[i].Journal}}</td>
+                            <td>{{df.iloc[i].Year}}</td>
+                            <td>{{df.iloc[i].Score}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">How does it work?</h2>
+                    <hr class="primary">
+                    <p>The recommender consists of 4 core recommenders utilizing different types of knowledge to come up with recommendations:</p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-file-text-o text-primary sr-icons"></i>
+                        <h3>TF-IDF</h3>
+                        <p class="text-muted">Finds the most similar papers based on TF-IDF based similarity as calculated on abstract, title and journal.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-list text-primary sr-icons"></i>
+                        <h3>Semantic Analysis</h3>
+                        <p class="text-muted">Finds the most semantically similar papers using manually annotated semantic tags of each paper.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-arrow-circle-o-up text-primary sr-icons"></i>
+                        <h3>Outgoing Citations</h3>
+                        <p class="text-muted">Finds paper-X such that papers cited by this paper are also cited by paper-X.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-arrow-circle-o-down text-primary sr-icons"></i>
+                        <h3>Incoming Citations</h3>
+                        <p class="text-muted">Finds paper-X such that papers who cited this paper also cited paper-X.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-bottom:50px">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-gears text-primary sr-icons"></i>
+                        <h3>Aggregation Engine</h3>
+                        <p class="text-muted">All recommendations are processed by an aggregation algorithm that comes up with the optimal list of most relevant papers.</p>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Hello! My name is Pinar Colak, and Academic Paper Recommender is my capstone project for the Galvanize Data Science Immersive program. Feel free to contact me if you have any questions or comments.</p>
+                </div>
+                <div class="col-lg-3 col-lg-offset-2 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:pinarpek@ygmail.com">E-Mail</a></p>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <i class="fa fa-linkedin-square fa-3x sr-contact"></i>
+                    <p><a href="www.linkedin.com/in/pinarcolak">LinkedIn</a></p>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <i class="fa fa-github fa-3x sr-contact"></i>
+                    <p><a href="www.github.com/harpik-p">GitHub</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="../static/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="../static/js/scrollreveal.min.js"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="../static/js/creative.min.js"></script>
+
+</body>
+
+</html>
