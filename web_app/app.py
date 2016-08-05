@@ -35,6 +35,7 @@ def recommender():
         cursor.execute(query_recommendations)
         data = cursor.fetchall()
         df_recommendations = pd.DataFrame(list(data), columns=['PMID', "Title", "Journal", "Year", "Score"])
+        df_recommendations['url']=df_recommendations.PMID.apply(lambda x: "http://www.ncbi.nlm.nih.gov/pubmed/?term="+str(x))
         rec_result = df_recommendations
 
         cursor.execute(query_pmid)

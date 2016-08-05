@@ -167,18 +167,17 @@
                         <col width="30">
                         <col width="30">
                         <tr>
-                            <th>Rank</th>
-                            <th>PMID</th>
-                            <th>Title</th>
-                            <th>Journal</th>
-                            <th>Year</th>
-                            <th>Score</th>
+                            <th><b>Rank</b></th>
+                            <th><b>PMID</b></th>
+                            <th><b>Title</b></th>
+                            <th><b>Journal</b></th>
+                            <th><b>Year</b></th>
+                            <th><b>Score</b></th>
                         </tr>
                         {% for i in range(df.shape[0]) %}
                         <tr>
                             <td>{{i+1}}</td>
-                            <td>
-                                {{df.iloc[i].PMID}}</td>
+                            <td><a href={{df.iloc[i].url}} target="_blank"><FONT COLOR="white">{{df.iloc[i].PMID}}</td>
                             <td>{{df.iloc[i].Title}}</td>
                             <td>{{df.iloc[i].Journal}}</td>
                             <td>{{df.iloc[i].Year}}</td>
