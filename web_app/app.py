@@ -28,19 +28,35 @@ def recommender():
             "(SELECT recommended_pmid as pmid, sum(51-rank) as score " \
             "FROM recommendation " \
             "WHERE pmid=" + pmid +" GROUP BY recommended_pmid ORDER BY score DESC) r on p.pmid=r.pmid;"
-    cursor.execute(query_recommendations)
-    data = cursor.fetchall()
-    df_recommendations = pd.DataFrame(list(data), columns=['PMID', "Title", "Journal", "Year", "Score"])
-    rec_result = df_recommendations
 
-    query_pmid = "SELECT pmid, title, journal_name, year FROM paper WHERE pmid=" + pmid+";"
+    query_pmid = "SELECT pmid, title, journal_name, year FROM paper WHERE pmid=" + pmid + ";"
 
-    cursor.execute(query_pmid)
-    pmid_info = cursor.fetchall()
-    df_pmid = pd.DataFrame(list(pmid_info), columns=['PMID', "Title", "Journal", "Year"])
-    pmid_result = df_pmid
+    try:
+        cursor.execute(query_recommendations)
+        data = cursor.fetchall()
+        df_recommendations = pd.DataFrame(list(data), columns=['PMID', "Title", "Journal", "Year", "Score"])
+        rec_result = df_recommendations
 
-    return render_template('recommender.html', df=rec_result, df_pmid=pmid_result, form_action="/recommender#search")
+        cursor.execute(query_pmid)
+        pmid_info = cursor.fetchall()
+        df_pmid = pd.DataFrame(list(pmid_info), columns=['PMID', "Title", "Journal", "Year"])
+        pmid_result = df_pmid
+
+        if data:
+            return render_template('recommender.html', msg="", df=rec_result, df_pmid=pmid_result,
+                                   form_action="/recommender#search")
+
+        else:
+            return render_template('index.html',
+                                   msg="Unfortunately, this paper is not in our database. Please try another paper.",
+                                   form_action='/recommender#search')
+
+    except:
+        return render_template('index.html',
+                           msg="Please enter a valid paper id.",
+                           form_action='/recommender#search')
+
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
