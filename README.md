@@ -31,7 +31,7 @@ XML source files were parsed into a mySQL database containing two tables
 “paper” and “citation”. Subsequently, this tables are dumped into S3 in 
 a format ready to be consumed by Spark accessed through Python shell.
 
-## Modelling: 
+## Modelling
 The recommender includes 4 core recommenders utilizing different types of knowledge to come up with recommendations:
 * Text similarity based recommender: Finds top-K most similar papers based on TF-IDF based similarity as calculated on abstract and title;
 * Semantic similarity based recommender: Finds the most semantically similar papers using manually annotated semantic tags of each paper, which is available for a large portion of the papers;
