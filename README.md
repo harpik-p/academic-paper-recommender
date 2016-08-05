@@ -16,9 +16,9 @@ techniques. My aim was to use the abstract and fulltext of papers (if available)
 along with citations (if available) in order to find most relevant papers for a given paper.
 
 ## Data Sources
-National Institute for Health ([NIH](http://www.ncbi.nlm.nih.gov/pubmed)) 
+National Institute for Health (NIH) 
 provides comprehensive API to access the central biomedical metadata 
-repository named PubMed. I extracted information from raw XML files of about 
+repository named [PubMed](http://www.ncbi.nlm.nih.gov/pubmed). I extracted information from raw XML files of about 
 1M papers. The dataset contains full text for only a few million papers 
 but metadata (publication year, title, journal name, semantic tags, abstract, 
 author and affiliation info) for all papers. In addition, it contains out-going 
@@ -56,5 +56,12 @@ Finally, all recommendations are processed by an aggregation algorithm that come
 ```
 
 ## Deployment
-The algorithms runs in batch mode, meaning that recommendations for each paper are pre-calculated and loaded into “recommendation” table. This table stores 50 recommendations for each of the algorithm as well as 50 recommendations from the aggregation algorithm. The content of this table are accessed and queried through a web-interface. Every biomedical paper has a unique id, called PMID, which stands for PubMed id. In the web-interface the user is expected to supply the PMID of the paper to get recommendations for. Ranked results from each algorithm are presented as well as the final aggregation list in the web interface.
+The algorithms runs in batch mode, meaning that recommendations for each paper 
+are pre-calculated and loaded into “recommendation” table. This table stores 50 
+recommendations for each of the algorithm as well as 50 recommendations from the 
+aggregation algorithm. The content of this table are accessed and queried through 
+a web-interface. Every biomedical paper has a unique id, called PMID, which stands 
+for PubMed id. In the web-interface the user is expected to supply the PMID of the 
+paper to get recommendations for. Final aggregation list and their
+ranks are presented in the web interface.
 
