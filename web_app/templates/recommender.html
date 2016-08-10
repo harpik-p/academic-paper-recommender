@@ -97,14 +97,14 @@
                         <p><small><span style="color: black"> {{msg}}</span></small></p>
                     </div>
                     <div class="header-content-inner-2">
-                        <p><small>If you don't know the PMID of the paper you are interested in, <a href="http://www.ncbi.nlm.nih.gov/pubmed" target="_blank"><FONT COLOR="white">click here.</FONT></a></small></p>
+                        <p>If you don't know the PMID of the paper you are interested in, <a href="http://www.ncbi.nlm.nih.gov/pubmed" target="_blank"><FONT COLOR="white">click here.</FONT></a></p>
                     </div>
                     <div style="margin-bottom:50px">
                     </div>
             </div>
 
             <div class="col-lg-12 text-left">
-                <p><b> The paper you provided:</b></p>
+                <p><b><font size="4"> The paper you provided:</b></p>
             </div>
 
             <div class="row">
@@ -119,22 +119,22 @@
                         }
                     </style>
                     <table style="width:100%">
-                        <col width="30">
+                        <col width="20">
                         <col width="300">
                         <col width="200">
                         <col width="30">
                         <tr>
-                            <th>PMID</th>
-                            <th>Title</th>
-                            <th>Journal</th>
-                            <th>Year</th>
+                            <th><font size="4">PMID</font></th>
+                            <th><font size="4">Title</font></th>
+                            <th><font size="4">Journal</font></th>
+                            <th><font size="4">Year</font></th>
                         </tr>
                         {% for i in range(df_pmid.shape[0]) %}
                         <tr>
-                            <td>{{df_pmid.iloc[i].PMID}}</td>
-                            <td>{{df_pmid.iloc[i].Title}}</td>
-                            <td>{{df_pmid.iloc[i].Journal}}</td>
-                            <td>{{df_pmid.iloc[i].Year}}</td>
+                            <td><font size="4">{{df_pmid.iloc[i].PMID}}</font></td>
+                            <td><font size="4">{{df_pmid.iloc[i].Title}}</font></td>
+                            <td><font size="4">{{df_pmid.iloc[i].Journal}}</font></td>
+                            <td><font size="4">{{df_pmid.iloc[i].Year}}</font></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -144,7 +144,7 @@
                 </div>
 
             <div class="col-lg-12 text-left">
-                <p><b> Here are the similar papers we found for you:</b></p>
+                <p><b> <font size="4">Here are the similar papers we found for you:</font></b></p>
             </div>
             <div style="margin-bottom:15px">
             </div>
@@ -160,28 +160,22 @@
                         }
                     </style>
                     <table style="width:100%">
-                        <col width="10">
-                        <col width="30">
-                        <col width="250">
-                        <col width="200">
-                        <col width="30">
+                        <col width="20">
+                        <col width="300">
+                        <col width="150">
                         <col width="30">
                         <tr>
-                            <th><b>Rank</b></th>
-                            <th><b>PMID</b></th>
-                            <th><b>Title</b></th>
-                            <th><b>Journal</b></th>
-                            <th><b>Year</b></th>
-                            <th><b>Score</b></th>
+                            <th><b><font size="4">PMID</font></b></th>
+                            <th><b><font size="4">Title</font></b></th>
+                            <th><b><font size="4">Journal</font></b></th>
+                            <th><b><font size="4">Year</font></b></th>
                         </tr>
                         {% for i in range(df.shape[0]) %}
                         <tr>
-                            <td>{{i+1}}</td>
-                            <td><a href={{df.iloc[i].url}} target="_blank"><FONT COLOR="white">{{df.iloc[i].PMID}}</td>
-                            <td>{{df.iloc[i].Title}}</td>
-                            <td>{{df.iloc[i].Journal}}</td>
-                            <td>{{df.iloc[i].Year}}</td>
-                            <td>{{df.iloc[i].Score}}</td>
+                            <td><a href={{df.iloc[i].url}} target="_blank"><FONT COLOR="white" size="4">{{df.iloc[i].PMID}}</font></a></td>
+                            <td><font size="4">{{df.iloc[i].Title}}</font></td>
+                            <td><font size="4">{{df.iloc[i].Journal}}</font></td>
+                            <td><font size="4">{{df.iloc[i].Year}}</font></td>
                         </tr>
                         {% endfor %}
                     </table>
